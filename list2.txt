@@ -1,0 +1,37 @@
+<h1>직원관리</h1>
+<p></p>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">CHECK</th>
+            <th scope="col">no.</th>
+            <th scope="col">이름</th>
+            <th scope="col">직급</th>
+            <th scope="col">입사일자</th>
+            <th scope="col">전화번호</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for Staff_info in staffs %}
+            <tr>
+                <td><input type="checkbox" name="agree" id="agree"></td>
+                <td>{{forloop.counter}}</td>
+                <td><a href="{% url 'staff_read' id=Staff_info.id %}">{{Staff_info.staff_name}}</a></td>
+                <td>{{Staff_info.staff_position}}</td>
+                <td>{{Staff_info.staff_day}}</td>
+                <td>{{Staff_info.staff_phonenumber}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="btn btn-group">
+    <a href="{% url 'staff_create' %}" class="btn btn-info">입력</a>
+
+
+
+
+</div>
+
+
+
+                            <td><a href="{% url 'staff_read' id=Staff_info.id %}">{{Staff_info.staff_name}}</a></td>
