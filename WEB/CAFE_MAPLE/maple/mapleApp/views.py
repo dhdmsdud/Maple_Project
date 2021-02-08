@@ -26,7 +26,7 @@ def menu(request):
 
 # staff
 def staff(request):
-    staffs = Staff_info.objects.all()
+    staffs  = Staff.objects.all()
     context = {'staffs' : staffs}
     return render(request, 'staff.html', context)
 
@@ -39,35 +39,35 @@ def salesStatus(request):
 # ----------------------< 박우환 >----------------------#
 # ----------------------< 오은영 >----------------------#
 def create_staff(request):
-    staff_identification = request.POST['staff_identification']
-    staff_name           = request.POST['staff_name']
-    staff_position       = request.POST['staff_position']
-    staff_day            = request.POST['staff_day']
-    staff_phonenumber    = request.POST['staff_phonenumber']
-    staffs = Staff_info(staff_identification=staff_identification, staff_name=staff_name, staff_position=staff_position,
-                        staff_day=staff_day, staff_phonenumber=staff_phonenumber)
+    staffid     = request.POST['staffid']
+    staffname   = request.POST['staffname']
+    jobtitle    = request.POST['jobtitle']
+    startdate   = request.POST['startdate']
+    phone       = request.POST['phone']
+    staffs      = Staff(staffid=staffid, staffname=staffname, jobtitle=jobtitle,
+                        startdate=startdate, phone=phone)
     staffs.save()
     return redirect('staff')
 
 def update_staff(request):
     id = request.POST['id']
-    staff_identification = request.POST['staff_identification']
-    staff_name           = request.POST['staff_name']
-    staff_position       = request.POST['staff_position']
-    staff_day            = request.POST['staff_day']
-    staff_phonenumber    = request.POST['staff_phonenumber']
-    staffs = Staff_info.objects.get(id=id)
-    staffs.staff_identification = staff_identification
-    staffs.staff_name           = staff_name
-    staffs.staff_position       = staff_position
-    staffs.staff_day            = staff_day
-    staffs.staff_phonenumber    = staff_phonenumber
+    staffid     = request.POST['staffid']
+    staffname   = request.POST['staffname']
+    jobtitle    = request.POST['jobtitle']
+    startdate   = request.POST['startdate']
+    phone       = request.POST['phone']
+    staffs      = Staff.objects.get(id=id)
+    staffs.staffid  = staffid
+    staffs.staffname    = staffname
+    staffs.jobtitle     = jobtitle
+    staffs.startdate    = startdate
+    staffs.phone        = phone
     staffs.save()
     return redirect('staff')
 
 def delete_staff(request):
     id = request.POST['id']
-    staffs = Staff_info.objects.get(id=id)
+    staffs = Staff.objects.get(id=id)
     staffs.delete()
     return redirect('staff')
 

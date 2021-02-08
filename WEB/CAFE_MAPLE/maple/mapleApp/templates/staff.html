@@ -137,14 +137,14 @@
 
 
                       <tbody id="staff_table">
-                          {% for Staff_info in staffs %}
+                          {% for Staff in staffs %}
                           <tr>
-                            <td>{{Staff_info.id}}</td>
-                            <td>{{Staff_info.staff_identification}}</td>
-                            <td>{{Staff_info.staff_name}}</a></td>
-                            <td>{{Staff_info.staff_position}}</td>
-                            <td>{{Staff_info.staff_day}}</td>
-                            <td>{{Staff_info.staff_phonenumber}}</td>
+                            <td>{{Staff.id}}</td>
+                            <td>{{Staff.staffid}}</td>
+                            <td>{{Staff.staffname}}</a></td>
+                            <td>{{Staff.jobtitle}}</td>
+                            <td>{{Staff.startdate}}</td>
+                            <td>{{Staff.phone}}</td>
                             </tr>
                           {% endfor %}
                       </tbody>
@@ -193,32 +193,32 @@
                         <div class="box-body">
                           <div class="form-group">
                             <label for="exampleInputEmail1"> ✔ ID </label>
-                              <input type="text"  name="staff_identification" readonly
-                                id='staff_identification' class="form-control" placeholder="">
+                              <input type="text"  name="staffid" readonly
+                                id='staffid' class="form-control" placeholder="">
                           </div>
 
                           <div class="form-group">
                             <label for="exampleInputEmail1"> ✔ 이름 </label>
-                              <input type="text"  name="staff_name" readonly
-                                id='staff_name' class="form-control" placeholder="">
+                              <input type="text"  name="staffname" readonly
+                                id='staffname' class="form-control" placeholder="">
                           </div>
 
                           <div class="form-group">
                             <label for="exampleInputEmail1"> ✔ 직급 </label>
-                              <input type="text"   name="staff_position" readonly
-                                id='staff_position' class="form-control" placeholder="">
+                              <input type="text"   name="jobtitle" readonly
+                                id='jobtitle' class="form-control" placeholder="">
                           </div>
 
                           <div class="form-group">
                             <label for="exampleInputEmail1"> ✔ 입사일자 </label>
-                              <input type="date"   name="staff_day" readonly
-                                id='staff_day' class="form-control" placeholder="">
+                              <input type="date"   name="startdate" readonly
+                                id='startdate' class="form-control" placeholder="">
                           </div>
 
                            <div class="form-group">
                             <label for="exampleInputEmail1"> ✔ 전화번호 </label>
-                              <input type="tel"  name="staff_phonenumber" readonly
-                                id='staff_phonenumber' class="form-control" placeholder="010-0000-0000">
+                              <input type="tel"  name="phone" readonly
+                                id='phone' class="form-control" placeholder="010-0000-0000">
                             </div>
 
                           <!--   업데이트 구분 : ( Y: 수정 , N:신규        -->
@@ -282,7 +282,7 @@
         $('#regForm').attr('action' , "{% url 'create_staff' %}").submit() ;
     })
     $('#modiBtn3').click(function(){
-        alert($('#staff_identification').val())
+        alert($('#staffid').val())
         alert($('#id').val())
         $('#regForm').attr('action' , "{% url 'update_staff' %}").submit() ;
     })
@@ -290,11 +290,11 @@
         $('#regForm').attr('action' , "{% url 'delete_staff' %}").submit() ;
     })
     $('#inputBtn2').click(function(){
-        $('#staff_identification').removeAttr('readonly')
-        $('#staff_name').removeAttr('readonly')
-        $('#staff_position').removeAttr('readonly')
-        $('#staff_day').removeAttr('readonly')
-        $('#staff_phonenumber').removeAttr('readonly')
+        $('#staffid').removeAttr('readonly')
+        $('#staffname').removeAttr('readonly')
+        $('#jobtitle').removeAttr('readonly')
+        $('#startdate').removeAttr('readonly')
+        $('#phone').removeAttr('readonly')
     })
     $('#staff_table tr').click(function() {
         var str = ""
@@ -307,11 +307,11 @@
         })
         alert(tdArr)
         $('#id').removeAttr('readonly').val(tdArr[0])
-        $('#staff_identification').removeAttr('readonly').val(tdArr[1])
-        $('#staff_name').removeAttr('readonly').val(tdArr[2])
-        $('#staff_position').removeAttr('readonly').val(tdArr[3])
-        $('#staff_day').removeAttr('readonly').val(tdArr[4])
-        $('#staff_phonenumber').removeAttr('readonly').val(tdArr[5])
+        $('#staffid').removeAttr('readonly').val(tdArr[1])
+        $('#staffname').removeAttr('readonly').val(tdArr[2])
+        $('#jobtitle').removeAttr('readonly').val(tdArr[3])
+        $('#startdate').removeAttr('readonly').val(tdArr[4])
+        $('#phone').removeAttr('readonly').val(tdArr[5])
 
     })
 
