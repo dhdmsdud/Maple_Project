@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from mapleApp import views
-from mapleApp import views_sales_status
+# from mapleApp import views_sales_status
 
 
 urlpatterns = [
@@ -45,9 +45,9 @@ urlpatterns = [
     path('deletemenu/', views.deletemenu, name='deletemenu'),
     path('updatemenu/', views.updatemenu, name='updatemenu'),
     # ----------------------< 최유숙 >----------------------#
-    path('serchStatus/', views_sales_status.serchStatus, name='serchStatus'),
-    # 그래프 line
-    path('line/', views_sales_status.line, name='line'),
+    # path('serchStatus/', views_sales_status.serchStatus, name='serchStatus'),
+    # # 그래프 line
+    # path('line/', views_sales_status.line, name='line'),
 #----------------------< sample >----------------------#
     # sample
     path('sampleUi/'    , views.sampleUi      ,name='sampleUi'),

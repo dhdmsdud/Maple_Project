@@ -21,7 +21,7 @@
 
               <h2 class="section-heading mb-4">
                 <img  src="{% static 'img/cafe_icon3.png'%}" width="40" height="40">
-                <span class="text-uppercase text-primary"> 메뉴 </span>
+                <span class="text-uppercase text-primary"> 직원 </span>
               </h2>
 
 
@@ -37,7 +37,7 @@
               <br>
 
 
-{%if menus %}
+{% if staffs %}
     <!--  MAPLE: 테이블  START  -->
               <div class="container d-flex justify-content-center mt-50 mb-50">
                 <div class="card w-100">
@@ -48,9 +48,12 @@
                       <thead class="thead-light">
                         <tr>
                           <th> </th>
-                          <th scope="col"></th>
-                          <th scope="col">상품명</th>
-                          <th scope="col">가격</th>
+                          <th scope="col">NO.</th>
+                          <th scope="col">ID</th>
+                          <th scope="col">이름</th>
+                          <th scope="col">직급</th>
+                          <th scope="col">입사일자</th>
+                          <th scope="col">전화번호</th>
                         </tr>
                       </thead>
 
@@ -59,18 +62,19 @@
 
 
 
-{%  for menu in  menus   %}
+{% for staff in  staffs %}
 
 
                       <tbody>
                         <tr>
-                          <td> <input  type="radio" name="radioValue" value="{{menu.menuid}}"> </td>
-                          <td id="mId_{{menu.menuid}}">{{menu.menuid}}</td>
-                          <td id="mName_{{menu.menuid}}" >{{menu.menuname}}</td>
-                          <td id="mPrice_{{menu.menuid}}">{{menu.price}}</td>
-
+                          <td> <input  type="radio" name="radioValue" value="{{Staff.staffid}}"> </td>
+                          <td id="sId_{{staff.staffid}}">{{staff.staffid}}</td>
+                          <td id="sName_{{staff.staffid}}" >{{staff.staffname}}</td>
+                          <td id="sJobtitle_{{staff.staffid}}">{{staff.jobtitle}}</td>
+                          <td id="sStartdate_{{staff.staffid}}">{{staff.startdate|date:'Y-m-d'}}</td>
+                          <td id="sPhone_{{staff.staffid}}">{{staff.phone}}</td>
                         </tr>
-{%    endfor    %}
+{% endfor %}
 
                       </tbody>
                     </table>
@@ -104,7 +108,7 @@
 <!--  MAPLE:  TITLE  -->
               <h2 class="section-heading mb-4">
                 <img  src="{% static 'img/cafe_icon3.png'%}" width="40" height="40">
-                <span class="text-uppercase text-primary" > 상품정보 </span>
+                <span class="text-uppercase text-primary" > 직원정보 </span>
               </h2>
 
 <!--  MAPLE:  INPUT  -->
@@ -115,26 +119,38 @@
                   <!-- general form elements -->
                     <div class="box box-primary">
                     <!-- /.box-header -->
-                      <form id="regForm"  method="post" action="{% url 'insertmenu' %}" >
+                      <form id="regForm"  method="post" action="{% url 'create_staff' %}" >
                       {% csrf_token %}
 
                         <div class="box-body">
                           <div class="form-group">
-                            <label for="exampleInputEmail1"> ✔ 상품 아이디 </label>
+                            <label for="exampleInputEmail1"> ✔ 직원 아이디 </label>
                               <input type="text" readonly="readonly"
-                                id='menuId' name="menuId" class="form-control" placeholder="">
+                                id='staffId' name="staffId" class="form-control" placeholder="">
                           </div>
 
                           <div class="form-group">
-                            <label for="exampleInputEmail1"> ✔ 상품명 </label>
+                            <label for="exampleInputEmail1"> ✔ 이름 </label>
                               <input type="text" readonly="readonly"
-                                id='menuName' name="menuName" class="form-control" placeholder="">
+                                id='staffName' name="staffName" class="form-control" placeholder="">
                           </div>
 
                           <div class="form-group">
-                            <label for="exampleInputEmail1"> ✔ 가격 </label>
+                            <label for="exampleInputEmail1"> ✔ 직금 </label>
                               <input type="text"  readonly="readonly"
-                                id='menuPrice' name="menuPrice" class="form-control" placeholder="">
+                                id='staffJobtitle' name="staffJobtitle" class="form-control" placeholder="">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="exampleInputEmail1"> ✔ 입사일자 </label>
+                              <input type="date"  readonly="readonly"
+                                id='staffStartdate' name="staffStartdate" class="form-control" placeholder="">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="exampleInputEmail1"> ✔ 전화번호 </label>
+                              <input type="text"  readonly="readonly"
+                                id='staffPhone' name="staffPhone" class="form-control" placeholder="">
                           </div>
                           <input type="hidden" name="mId" id="mId"  value="">
                           <!--   업데이트 구분 : ( Y: 수정 , N:신규        -->
@@ -192,7 +208,7 @@
          //----------------------------------
 	     $('#serchBtn1').click(function(){
 	         //alert("!조회버튼")
-			 location.href='../serchmenu'
+			 location.href='../search_staff'
 		 })
 
 
@@ -201,8 +217,8 @@
          //----------------------------------
 	     $('#inputBtn2').click(function(){
 	         //alert("!입력버튼")
-			 $('#menuId, #menuName, #menuPrice').attr('readonly', false);
-			 $('#menuId').attr('value',$('#menuId').text());
+			 $('#staffId, #staffName, #staffJobtitle, #staffStartdate, #staffPhone').attr('readonly', false);
+			 $('#staffId').attr('value',$('#staffId').text());
 		 })
 
          //----------------------------------
@@ -212,21 +228,23 @@
 	         //alert("!수정버튼") ;
              var checkbox = $("[name=radioValue]:checked");
 			 var ckVal= checkbox.val();
-             //alert( $('#mName_'+ckVal).text() )
+             //alert( $('#sName_'+ckVal).text() )
 
              // 선택된 버튼이 없으면 메세지
              if (ckVal == null){
                  alert('! 수정할 항목을 선택해 주세요. ')
              }else{
                  // 입력창을 활성화
-                 $('#menuName, #menuPrice').attr('readonly', false);
+                 $('#staffId, #staffName, #staffJobtitle, #staffStartdate, #staffPhone').attr('readonly', false);
 
                  // 선택된 행 정보 셋팅
-                 $('#menuId').val($('#mId_'+ckVal).text())
-                 $('#menuName').val( $('#mName_'+ckVal).text()  ) ;
-                 $('#menuPrice').val( $('#mPrice_'+ckVal).text()  );
+                 $('#staffId').val($('#sId_'+ckVal).text())
+                 $('#staffName').val( $('#sName_'+ckVal).text()  ) ;
+                 $('#staffJobtitle').val( $('#sJobtitle_'+ckVal).text()  );
+                 $('#staffStartdate').val( $('#sStartdate_'+ckVal).text()  );
+                 $('#staffPhone').val( $('#sPhone_'+ckVal).text()  );
 
-                 $('#mId').val( ckVal  );
+                 $('#sId').val( ckVal  );
                  // 업데이트 구분을 Y로 변경 "id
                  $('#updateYn').val( "Y" );
 
@@ -243,11 +261,11 @@
 
              // 수정구분이 'Y' : 수정
              if (updateYn == 'Y'){
-                 $('#regForm').attr('action' , "{% url 'updatemenu' %}")
+                 $('#regForm').attr('action' , "{% url 'update_staff' %}")
                  $('#regForm').submit() ;
              // 수정구분이 'N' : 입력
              }else{
-                 $('#regForm').attr('action' , "{% url 'insertmenu' %}")
+                 $('#regForm').attr('action' , "{% url 'create_staff' %}")
                  $('#regForm').submit() ;
              }
 		 })
@@ -259,14 +277,14 @@
 	         //alert("!삭제버튼") ;
              var checkbox = $("[name=radioValue]:checked");
 			 var ckVal= checkbox.val()
-             //alert( $('#mName_'+ckVal).text() )
+             //alert( $('#sName_'+ckVal).text() )
 
              // 선택된 버튼이 없으면 메세지
              if (ckVal == null){
                  alert('! 삭제할 항목을 선택해 주세요.  ')
              }else{
-                 $('#mId').val( ckVal  );
-                 $('#regForm').attr('action' , "{% url 'deletemenu' %}")
+                 $('#sId').val( ckVal  );
+                 $('#regForm').attr('action' , "{% url 'delete_staff' %}")
                  $('#regForm').submit() ;
 
              }
