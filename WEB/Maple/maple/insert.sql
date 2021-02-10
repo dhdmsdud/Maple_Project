@@ -54,12 +54,12 @@ INSERT INTO m_menu(menuid,menuname,price) values ('M000008','에스프레소(Esp
 INSERT INTO m_menu(menuid,menuname,price) values ('M000009','콜드브루(Cold Brew)',4500);
 
 /*직원  데이터 */
-INSERT INTO m_staff(staffid,staffname,jobtitle,startdate,phone) values ('S000001', 'Anthony','J10','2010-01-01 10:00:00','010-4567-1245');
-INSERT INTO m_staff(staffid,staffname,jobtitle,startdate,phone) values ('S000002', 'Robert Downey Jr','J20','2012-02-01 0:00:00','010-4577-5674');
-INSERT INTO m_staff(staffid,staffname,jobtitle,startdate,phone) values ('S000003', 'Nyeung','J30','2017-03-01 10:00:00','010-1244-1412');
-INSERT INTO m_staff(staffid,staffname,jobtitle,startdate,phone) values ('S000004', 'Jacob','J30','2019-04-01 10:00:00','010-5644-7785');
-INSERT INTO m_staff(staffid,staffname,jobtitle,startdate,phone) values ('S000005', 'Minjae','J40','2020-05-01 10:00:00','010-1244-7512');
-INSERT INTO m_staff(staffid,staffname,jobtitle,startdate,phone) values ('S000006', 'Bona','J50','2021-02-01 10:00:00','010-6855-4566');
+INSERT INTO m_staff(staffid,staffname,jobtitle,startdate,phone) values ('S000001', 'Anthony','J10','2010-01-01','010-4567-1245');
+INSERT INTO m_staff(staffid,staffname,jobtitle,startdate,phone) values ('S000002', 'Robert Downey Jr','J20','2012-02-01','010-4577-5674');
+INSERT INTO m_staff(staffid,staffname,jobtitle,startdate,phone) values ('S000003', 'Nyeung','J30','2017-03-01','010-1244-1412');
+INSERT INTO m_staff(staffid,staffname,jobtitle,startdate,phone) values ('S000004', 'Jacob','J30','2019-04-01','010-5644-7785');
+INSERT INTO m_staff(staffid,staffname,jobtitle,startdate,phone) values ('S000005', 'Minjae','J40','2020-05-01','010-1244-7512');
+INSERT INTO m_staff(staffid,staffname,jobtitle,startdate,phone) values ('S000006', 'Bona','J50','2021-02-01','010-6855-4566');
 
 
 /**********************< 20210207  >******************************************************************************************/

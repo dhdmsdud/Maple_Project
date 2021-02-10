@@ -40,9 +40,9 @@ class Info(models.Model):
 
 #----------------------< 메뉴 >----------------------#
 class Menu(models.Model):
-    menuid = models.CharField(max_length=20, primary_key=True) #메뉴 아이디
-    menuname = models.CharField(max_length=100)                #메뉴명
-    price = models.IntegerField()                              #가격
+    menuid   = models.CharField(max_length=20, primary_key=True)    #메뉴 아이디
+    menuname = models.CharField(max_length=100)                     #메뉴명
+    price    = models.IntegerField()                                #가격
 
 
     class Meta:
@@ -55,11 +55,11 @@ class Menu(models.Model):
 
 #----------------------< 직원 >----------------------#
 class Staff(models.Model):
-    staffid = models.CharField(max_length=20)                     #직원ID
-    staffname = models.CharField(max_length=20)                   #직원명
-    jobtitle = models.CharField(max_length=20,choices=job_title ) #직급
-    startdate = models.DateTimeField()                            #입사일
-    phone = models.CharField(max_length=20)
+    staffid   = models.CharField(max_length=20)                     #직원ID
+    staffname = models.CharField(max_length=20)                     #직원명
+    jobtitle  = models.CharField(max_length=20,choices=job_title )  #직급
+    startdate = models.DateField()                                  #입사일
+    phone     = models.CharField(max_length=20)                     #전화번호
 
     class Meta:
         db_table = 'm_staff'
@@ -73,11 +73,11 @@ class Staff(models.Model):
 
 #----------------------< 주문 >----------------------#
 class Order(models.Model):
-    orderno = models.CharField(max_length=20, primary_key=True)      #주문번호
-    orderdate = models.CharField(max_length=10,default='')                      #주문일자('YYYY-MM-DD')
-    ordertime = models.CharField(max_length=10,default='')                      #주문시간('HH:MM:SS')
-    payment = models.CharField(max_length=20, choices=pay_choice)    #결제구분
-    status = models.CharField(max_length=20, choices=status_choice)  #완료여부
+    orderno   = models.CharField(max_length=20, primary_key=True)      #주문번호
+    orderdate = models.CharField(max_length=10,default='')             #주문일자('YYYY-MM-DD')
+    ordertime = models.CharField(max_length=10,default='')             #주문시간('HH:MM:SS')
+    payment   = models.CharField(max_length=20, choices=pay_choice)    #결제구분
+    status    = models.CharField(max_length=20, choices=status_choice) #완료여부
 
     class Meta:
         db_table = 'm_order'
@@ -89,28 +89,28 @@ class Order(models.Model):
         return self.status
 
     def __str__(self):
-        return self.orderno + ' , ' + self.orderdate + ' , ' + self.payment + ' , ' + self.status
+        return str(self.orderno) + ' , ' + str(self.orderdate) + ' , ' + str(self.ordertime) + ' , ' + str(self.payment) + ' , ' + str(self.status)
 
 #----------------------< 주문상세 >----------------------#
 class OrderDetail(models.Model):
     orderno = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='related_orderno' )   #주문번호
-    menuid = models.ForeignKey(Menu, on_delete=models.CASCADE ,  related_name='related_menu' )     #메뉴
-    price = models.IntegerField(default=0 )                        #가격
-    qty = models.IntegerField(default=0 )                          #수량
-    sales = models.IntegerField(default=0 )                        #판매량
+    menuid  = models.ForeignKey(Menu, on_delete=models.CASCADE ,  related_name='related_menu' )     #메뉴
+    price   = models.IntegerField(default=0 )                                                       #가격
+    qty     = models.IntegerField(default=0 )                                                       #수량
+    sales   = models.IntegerField(default=0 )                                                       #판매량
 
     class Meta:
         db_table = 'm_orderdetail'
         unique_together =(('orderno','menuid'))
 
     def __str__(self):
-        return str(self.orderno) + ' , ' + str(self.menuid) + ' , ' + str(self.price)+ ' , ' + str(self.qty)
+        return str(self.orderno) + ' , ' + str(self.menuid) + ' , ' + str(self.price) + ' , ' + str(self.qty)
 
 
 #----------------------< User >----------------------#
 class User(models.Model) :
-    user_id = models.CharField(max_length=50 , verbose_name='사용자', primary_key=True)
-    user_pwd = models.CharField(max_length=50 , verbose_name='비밀번호')
+    user_id   = models.CharField(max_length=50 , verbose_name='사용자', primary_key=True)
+    user_pwd  = models.CharField(max_length=50 , verbose_name='비밀번호')
     user_mail = models.CharField(max_length=100 , verbose_name='이메일주소')
 
 
@@ -128,7 +128,7 @@ class User(models.Model) :
 
 #----------------------< Sample >----------------------#
 class SampleProduct(models.Model):
-    pd_name = models.CharField(max_length=100)
+    pd_name  = models.CharField(max_length=100)
     pd_price = models.IntegerField(default=0)
 
     class Meta:
