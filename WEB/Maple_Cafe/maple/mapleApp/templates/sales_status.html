@@ -1,3 +1,27 @@
+sales_status.html
+
+d
+m
+녕
+
+유형
+HTML
+크기
+9KB (9,373바이트)
+사용한 저장용량
+27KB (27,767바이트)
+위치
+templates
+소유자
+Rean Rean
+수정한 날짜
+오전 9:45, Rean Rean
+열어본 날짜
+내가 오전 9:59에 열어봄
+생성한 날짜
+2021. 2. 18.
+설명 추가
+뷰어가 다운로드할 수 있음
 <!-- *************************** MAPLE : 공통 (HEADER) START  ******************  -->
 {% include 'header.html' %}
 {% load static%}
@@ -43,8 +67,10 @@
                         <div class="input-group-prepend mr-5 ">
                           <label class="input-group-text" for="inputGroupSelect01">선택</label>
                           <select class="custom-select" id="report" name="report" >
-                            <option value="r_menu" selected>메뉴별 매출 현황</option>
-                            <option value="r_date"  >일자별 매출 현황</option>
+                            <option value="r_menu"  {% if report == "r_menu"%} selected="selected" {% endif %}>
+                              메뉴별 매출 현황</option>
+                            <option value="r_date"  {% if report == "r_date"%} selected="selected" {% endif %} >
+                              일자별 매출 현황</option>
                           </select>
                         </div>
 
@@ -261,7 +287,7 @@
             enabled: false
         },
         tooltip: {
-            pointFormat: '매출 : <b>{point.y} </b>'
+            pointFormat: '매출 : <b>{point.y:.1f} </b>'
         },
         series: [{
 
@@ -272,7 +298,7 @@
                 rotation: -90,
                 color: '#FFFFFF',
                 align: 'right',
-                format: '{point.y}', // one decimal
+                format: '{point.y:.1f}', // one decimal
                 y: 10, // 10 pixels down from the top
                 style: {
                     fontSize: '13px',

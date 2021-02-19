@@ -1,3 +1,28 @@
+order_list.html
+
+d
+m
+
+녕
+
+유형
+HTML
+크기
+10KB (9,869바이트)
+사용한 저장용량
+67KB (68,211바이트)
+위치
+template
+소유자
+박우환
+수정한 날짜
+오전 10:25, 박우환
+열어본 날짜
+내가 오전 10:45에 열어봄
+생성한 날짜
+2021. 2. 9.
+설명 추가
+뷰어가 다운로드할 수 있음
 <!-- *************************** MAPLE : 공통 (HEADER) START  ******************  -->
 {% include 'header.html' %}
 {% load static %}
@@ -46,9 +71,9 @@ thead{
                   <form action="{% url 'order_search' %}" method="GET" >
                     <div class=" align-items-center" style="vertical-align:middle;">
                       <select id="select_type" name="s_type" style="width: 100px;height:32px;" >
-                        <option value="id">주문번호</option>
-                        <option value="content">주문내용</option>
-                        <option value="status">상    황</option>
+                        <option value="id" {% if s_type == 'id'%} selected="selected" {% endif %}>주문번호</option>
+                        <option value="content" {% if s_type == 'content' %} selected="selected" {% endif %}>주문내용</option>
+                        <option value="status" {% if s_type == 'status' %} selected="selected" {% endif %}>상    황</option>
                       </select>
                       &nbsp;
                       <span id="select_option">
@@ -187,7 +212,7 @@ thead{
         }
       })
 
-     <!-- ysc 20210115 주문상태 변경 : 완료   -->
+    //  ysc 20210115 주문상태 변경 : 완료
      $('#statusBtn').click(function(){
          $('#regForm').attr('action' , "{% url 'change_status' %}")
          $('#regForm').submit() ;

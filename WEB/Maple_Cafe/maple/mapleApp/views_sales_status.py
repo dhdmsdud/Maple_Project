@@ -30,7 +30,7 @@ def searchStatus(request):
         }
         orderDetails = OrderDetail.objects.values('orderno__orderdate').filter(orderno__orderdate__range=[startdate, enddate]).annotate(**query).order_by('orderno__orderdate')
 
-    # 'r_menui' 메뉴뱔 매출 현황
+    # 'r_menu' 메뉴별 매출 현황
     else :
         query = {
             'date': Max('orderno__orderdate'),
